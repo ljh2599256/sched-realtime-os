@@ -1,0 +1,33 @@
+.SILENT:
+
+AR_x86=/usr/bin/ar
+AWK=/usr/bin/gawk
+CAT=/bin/cat
+CC_x86=/usr/bin/gcc
+CD=cd
+CONFIG_CFLAGS=-W -Wall -g -m32
+CONFIG_LDFLAGS=--warn-common
+CONFIG_QEMU_x86= -fda grub-boot-only.img 
+COPY=/bin/cp
+CP=/bin/cp
+CXX_x86=/usr/bin/g++
+ECHO=/bin/echo
+ELF_MODE=elf_i386
+GREP=/bin/grep
+GZIP=/bin/gzip
+INSTRUMENTATION=0
+KILL=/bin/kill
+LD_x86=/usr/bin/ld
+MKDIR=/bin/mkdir
+MV=/bin/mv
+OBJCOPY_x86=/usr/bin/objcopy
+OBJDUMP_x86=/usr/bin/objdump
+PERL=/usr/bin/perl
+QEMU_ppc=/usr/bin/qemu-system-ppc
+QEMU_sparc=/usr/bin/qemu-system-sparc
+QEMU_x86=/usr/bin/qemu-system-i386
+RANLIB_x86=/usr/bin/ranlib
+RM=/bin/rm -r -f
+SED=/bin/sed
+SLEEP=/bin/sleep
+TOUCH=/usr/bin/touch

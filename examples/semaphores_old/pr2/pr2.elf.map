@@ -1,0 +1,218 @@
+由于文件 (符号) 而包含了归档成员
+
+/home/ljh/downloads/pok/examples/semaphores/pr2/../../..//libpok/libpok.a(arch.lo)
+                              main.o (pok_do_syscall)
+/home/ljh/downloads/pok/examples/semaphores/pr2/../../..//libpok/libpok.a(core.lo)
+                              main.o (pok_thread_create)
+/home/ljh/downloads/pok/examples/semaphores/pr2/../../..//libpok/libpok.a(libc.lo)
+                              main.o (printf)
+
+分配公共符号
+公共符号            大小              文件
+
+pok_allocator_memspace
+                    0x8000            /home/ljh/downloads/pok/examples/semaphores/pr2/../../..//libpok/libpok.a(core.lo)
+errno               0x4               /home/ljh/downloads/pok/examples/semaphores/pr2/../../..//libpok/libpok.a(core.lo)
+pok_allocator_spaces
+                    0x4b0             /home/ljh/downloads/pok/examples/semaphores/pr2/../../..//libpok/libpok.a(core.lo)
+
+内存配置
+
+名称           来源             长度             属性
+*default*        0x0000000000000000 0xffffffffffffffff
+
+链结器命令稿和内存映射
+
+                0x0000000000000000                . = 0x0
+                0x0000000000000000                __partition_begin = .
+
+.text           0x0000000000000000     0x1386
+ *(.text)
+ .text          0x0000000000000000       0xcb main.o
+                0x0000000000000000                main
+ .text          0x00000000000000cb       0x33 activity.o
+                0x00000000000000cb                pinger_job
+ .text          0x00000000000000fe       0x14 /home/ljh/downloads/pok/examples/semaphores/pr2/../../..//libpok/libpok.a(arch.lo)
+                0x00000000000000fe                pok_arch_idle
+                0x0000000000000101                pok_do_syscall
+ .text          0x0000000000000112      0x906 /home/ljh/downloads/pok/examples/semaphores/pr2/../../..//libpok/libpok.a(core.lo)
+                0x0000000000000112                pok_allocator_print_spaces
+                0x0000000000000179                pok_allocator_allocate
+                0x0000000000000363                pok_allocator_delete_space
+                0x00000000000003c0                pok_allocator_merge_space
+                0x0000000000000495                pok_allocator_free
+                0x0000000000000594                pok_time_gettick
+                0x00000000000005e6                pok_time_get
+                0x0000000000000605                __pok_partition_start
+                0x0000000000000625                pok_sem_create
+                0x00000000000006a8                pok_sem_signal
+                0x0000000000000711                pok_sem_status
+                0x0000000000000717                pok_sem_wait
+                0x0000000000000790                pok_thread_create
+                0x00000000000007e2                pok_thread_attr_init
+                0x000000000000082c                pok_thread_period
+                0x000000000000087e                pok_thread_sleep
+                0x00000000000008d0                pok_thread_status
+                0x0000000000000922                pok_thread_delayed_start
+                0x0000000000000974                pok_thread_set_priority
+                0x00000000000009c6                pok_thread_resume
+ .text          0x0000000000000a18      0x96e /home/ljh/downloads/pok/examples/semaphores/pr2/../../..//libpok/libpok.a(libc.lo)
+                0x0000000000000d44                vprintf
+                0x0000000000000eb0                printf
+                0x0000000000000ed7                itoa
+                0x0000000000000f74                atoi
+                0x0000000000000fb9                memcpy
+                0x0000000000000fe1                memset
+                0x0000000000001003                memcmp
+                0x0000000000001052                strcmp
+                0x0000000000001094                strncmp
+                0x00000000000010f0                strcpy
+                0x0000000000001120                strncpy
+                0x000000000000115a                streq
+                0x0000000000001201                strlen
+                0x0000000000001220                __udivdi3
+                0x00000000000012c8                __umoddi3
+                0x00000000000012f3                rand
+                0x0000000000001323                free
+                0x0000000000001342                malloc
+                0x0000000000001361                calloc
+
+.iplt           0x0000000000001390        0x0
+ .iplt          0x0000000000001390        0x0 main.o
+
+.rodata         0x00000000000013a0       0x7d
+ *(.rodata)
+ .rodata        0x00000000000013a0       0x7d /home/ljh/downloads/pok/examples/semaphores/pr2/../../..//libpok/libpok.a(libc.lo)
+
+.rodata.str1.4  0x0000000000001420      0x24c
+ .rodata.str1.4
+                0x0000000000001420       0x1f main.o
+ *fill*         0x000000000000143f        0x1 
+ .rodata.str1.4
+                0x0000000000001440      0x22c /home/ljh/downloads/pok/examples/semaphores/pr2/../../..//libpok/libpok.a(core.lo)
+                                        0x22b (松开之前的大小)
+
+.eh_frame       0x000000000000166c      0x844
+ .eh_frame      0x000000000000166c       0x44 main.o
+ .eh_frame      0x00000000000016b0       0x28 activity.o
+                                         0x40 (松开之前的大小)
+ .eh_frame      0x00000000000016d8       0x30 /home/ljh/downloads/pok/examples/semaphores/pr2/../../..//libpok/libpok.a(arch.lo)
+                                         0x60 (松开之前的大小)
+ .eh_frame      0x0000000000001708      0x350 /home/ljh/downloads/pok/examples/semaphores/pr2/../../..//libpok/libpok.a(core.lo)
+                                        0x4b8 (松开之前的大小)
+ .eh_frame      0x0000000000001a58      0x458 /home/ljh/downloads/pok/examples/semaphores/pr2/../../..//libpok/libpok.a(libc.lo)
+                                        0x5d8 (松开之前的大小)
+
+.rodata.str1.1  0x0000000000001eb0       0x15
+ .rodata.str1.1
+                0x0000000000001eb0       0x15 activity.o
+
+.rel.dyn        0x0000000000001ec8        0x0
+ .rel.iplt      0x0000000000001ec8        0x0 main.o
+ .rel.text      0x0000000000001ec8        0x0 main.o
+
+.data           0x0000000000001ee0     0x8590
+ *(.data)
+ .data          0x0000000000001ee0        0x0 main.o
+ .data          0x0000000000001ee0        0x0 activity.o
+ .data          0x0000000000001ee0        0x0 /home/ljh/downloads/pok/examples/semaphores/pr2/../../..//libpok/libpok.a(arch.lo)
+ .data          0x0000000000001ee0        0x0 /home/ljh/downloads/pok/examples/semaphores/pr2/../../..//libpok/libpok.a(core.lo)
+ .data          0x0000000000001ee0        0x4 /home/ljh/downloads/pok/examples/semaphores/pr2/../../..//libpok/libpok.a(libc.lo)
+ *(.bss)
+ .bss           0x0000000000001ee4        0x0 main.o
+ .bss           0x0000000000001ee4        0x0 activity.o
+ .bss           0x0000000000001ee4        0x0 /home/ljh/downloads/pok/examples/semaphores/pr2/../../..//libpok/libpok.a(arch.lo)
+ .bss           0x0000000000001ee4        0x8 /home/ljh/downloads/pok/examples/semaphores/pr2/../../..//libpok/libpok.a(core.lo)
+                0x0000000000001ee4                pok_allocator_initialized
+                0x0000000000001ee8                pok_allocator_used_spaces
+ *fill*         0x0000000000001eec       0x14 
+ .bss           0x0000000000001f00       0x84 /home/ljh/downloads/pok/examples/semaphores/pr2/../../..//libpok/libpok.a(libc.lo)
+ *(COMMON)
+ *fill*         0x0000000000001f84       0x1c 
+ COMMON         0x0000000000001fa0     0x84d0 /home/ljh/downloads/pok/examples/semaphores/pr2/../../..//libpok/libpok.a(core.lo)
+                0x0000000000001fa0                pok_allocator_memspace
+                0x0000000000009fa0                errno
+                0x0000000000009fc0                pok_allocator_spaces
+                0x000000000000a470                __partition_end = .
+LOAD main.o
+LOAD activity.o
+LOAD /home/ljh/downloads/pok/examples/semaphores/pr2/../../..//libpok/libpok.a
+LOAD /home/ljh/downloads/pok/examples/semaphores/pr2/../../..//libpok//libpok.a
+OUTPUT(pr2.elf elf32-i386)
+
+.igot.plt       0x000000000000a470        0x0
+ .igot.plt      0x000000000000a470        0x0 main.o
+
+.debug_info     0x0000000000000000     0x4849
+ .debug_info    0x0000000000000000      0x2f2 main.o
+ .debug_info    0x00000000000002f2       0xa9 activity.o
+ .debug_info    0x000000000000039b      0x322 /home/ljh/downloads/pok/examples/semaphores/pr2/../../..//libpok/libpok.a(arch.lo)
+ .debug_info    0x00000000000006bd     0x2bad /home/ljh/downloads/pok/examples/semaphores/pr2/../../..//libpok/libpok.a(core.lo)
+ .debug_info    0x000000000000326a     0x15df /home/ljh/downloads/pok/examples/semaphores/pr2/../../..//libpok/libpok.a(libc.lo)
+
+.debug_abbrev   0x0000000000000000     0x19a0
+ .debug_abbrev  0x0000000000000000       0xf6 main.o
+ .debug_abbrev  0x00000000000000f6       0x6a activity.o
+ .debug_abbrev  0x0000000000000160      0x10b /home/ljh/downloads/pok/examples/semaphores/pr2/../../..//libpok/libpok.a(arch.lo)
+ .debug_abbrev  0x000000000000026b      0xc4a /home/ljh/downloads/pok/examples/semaphores/pr2/../../..//libpok/libpok.a(core.lo)
+ .debug_abbrev  0x0000000000000eb5      0xaeb /home/ljh/downloads/pok/examples/semaphores/pr2/../../..//libpok/libpok.a(libc.lo)
+
+.debug_loc      0x0000000000000000     0x11cb
+ .debug_loc     0x0000000000000000       0x13 main.o
+ .debug_loc     0x0000000000000013      0x1dd /home/ljh/downloads/pok/examples/semaphores/pr2/../../..//libpok/libpok.a(core.lo)
+ .debug_loc     0x00000000000001f0      0xfdb /home/ljh/downloads/pok/examples/semaphores/pr2/../../..//libpok/libpok.a(libc.lo)
+
+.debug_aranges  0x0000000000000000      0x490
+ .debug_aranges
+                0x0000000000000000       0x20 main.o
+ .debug_aranges
+                0x0000000000000020       0x20 activity.o
+ .debug_aranges
+                0x0000000000000040       0x40 /home/ljh/downloads/pok/examples/semaphores/pr2/../../..//libpok/libpok.a(arch.lo)
+ .debug_aranges
+                0x0000000000000080      0x1f8 /home/ljh/downloads/pok/examples/semaphores/pr2/../../..//libpok/libpok.a(core.lo)
+ .debug_aranges
+                0x0000000000000278      0x218 /home/ljh/downloads/pok/examples/semaphores/pr2/../../..//libpok/libpok.a(libc.lo)
+
+.debug_line     0x0000000000000000     0x17fa
+ .debug_line    0x0000000000000000      0x116 main.o
+ .debug_line    0x0000000000000116       0xf8 activity.o
+ .debug_line    0x000000000000020e       0xf4 /home/ljh/downloads/pok/examples/semaphores/pr2/../../..//libpok/libpok.a(arch.lo)
+ .debug_line    0x0000000000000302      0xb88 /home/ljh/downloads/pok/examples/semaphores/pr2/../../..//libpok/libpok.a(core.lo)
+ .debug_line    0x0000000000000e8a      0x970 /home/ljh/downloads/pok/examples/semaphores/pr2/../../..//libpok/libpok.a(libc.lo)
+
+.debug_str      0x0000000000000000     0x1379
+ .debug_str     0x0000000000000000      0x657 main.o
+                                        0x696 (松开之前的大小)
+ .debug_str     0x0000000000000657       0x27 activity.o
+                                        0x155 (松开之前的大小)
+ .debug_str     0x000000000000067e      0x2f2 /home/ljh/downloads/pok/examples/semaphores/pr2/../../..//libpok/libpok.a(arch.lo)
+                                        0x8f3 (松开之前的大小)
+ .debug_str     0x0000000000000970      0x6df /home/ljh/downloads/pok/examples/semaphores/pr2/../../..//libpok/libpok.a(core.lo)
+                                       0x7708 (松开之前的大小)
+ .debug_str     0x000000000000104f      0x32a /home/ljh/downloads/pok/examples/semaphores/pr2/../../..//libpok/libpok.a(libc.lo)
+                                       0x1910 (松开之前的大小)
+
+.comment        0x0000000000000000       0x35
+ .comment       0x0000000000000000       0x35 main.o
+                                         0x36 (松开之前的大小)
+ .comment       0x0000000000000035       0x36 activity.o
+ .comment       0x0000000000000035       0xd8 /home/ljh/downloads/pok/examples/semaphores/pr2/../../..//libpok/libpok.a(arch.lo)
+ .comment       0x0000000000000035      0x798 /home/ljh/downloads/pok/examples/semaphores/pr2/../../..//libpok/libpok.a(core.lo)
+ .comment       0x0000000000000035      0x396 /home/ljh/downloads/pok/examples/semaphores/pr2/../../..//libpok/libpok.a(libc.lo)
+
+.note.GNU-stack
+                0x0000000000000000        0x0
+ .note.GNU-stack
+                0x0000000000000000        0x0 main.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 activity.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 /home/ljh/downloads/pok/examples/semaphores/pr2/../../..//libpok/libpok.a(arch.lo)
+ .note.GNU-stack
+                0x0000000000000000        0x0 /home/ljh/downloads/pok/examples/semaphores/pr2/../../..//libpok/libpok.a(core.lo)
+ .note.GNU-stack
+                0x0000000000000000        0x0 /home/ljh/downloads/pok/examples/semaphores/pr2/../../..//libpok/libpok.a(libc.lo)
+
+.debug_ranges   0x0000000000000000       0x30
+ .debug_ranges  0x0000000000000000       0x30 /home/ljh/downloads/pok/examples/semaphores/pr2/../../..//libpok/libpok.a(libc.lo)
