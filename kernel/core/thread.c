@@ -102,7 +102,23 @@ void pok_thread_insert_sort_wrr(uint16_t index_low, uint16_t index_high)
     pok_threads[j+1]=val;
 }
 #endif
+#ifdef POK_NEEDS_SCHED_PRIORITY
 
+void pok_thread_insert_sort_priority(uint16_t index_low, uint16_t index_high)
+{   
+    uint32_t i=index_high,j=0;
+    pok_thread_t val;
+
+    val=pok_threads[i];
+    j=i-1;
+    while ( j>= index_low && pok_threads[j].priority > val.priority)
+    {
+        pok_threads[j+1] = pok_threads[j];
+        j--;
+    }
+    pok_threads[j+1]=val;
+}
+#endif
 
 
 
@@ -185,11 +201,11 @@ pok_ret_t pok_partition_thread_create (uint32_t*                  thread_id,
    /**
     * We can create a thread only if the partition is in INIT mode
     */
-   if (  (pok_partitions[partition_id].mode != POK_PARTITION_MODE_INIT_COLD) &&
+   /*if (  (pok_partitions[partition_id].mode != POK_PARTITION_MODE_INIT_COLD) &&
          (pok_partitions[partition_id].mode != POK_PARTITION_MODE_INIT_WARM) )
    {
       return POK_ERRNO_MODE;
-   }
+   }*/
 
    if (pok_partitions[partition_id].thread_index >= pok_partitions[partition_id].thread_index_high)
    {
@@ -273,7 +289,12 @@ pok_ret_t pok_partition_thread_create (uint32_t*                  thread_id,
       pok_thread_insert_sort_wrr(pok_partitions[partition_id].thread_index_low+1,id);
    }
 #endif
-
+#ifdef POK_NEEDS_SCHED_PRIORITY
+   if ((pok_partitions[partition_id].sched == POK_SCHED_PRIORITY) && (id > pok_partitions[partition_id].thread_index_low))
+   {
+      pok_thread_insert_sort_priority(pok_partitions[partition_id].thread_index_low+1,id);
+   }
+#endif
 
 #ifdef POK_NEEDS_INSTRUMENTATION
       pok_instrumentation_task_archi (id);

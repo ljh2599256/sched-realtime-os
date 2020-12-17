@@ -80,6 +80,11 @@ void pok_partition_setup_scheduler (const uint8_t pid)
 	    pok_partitions[pid].sched_func  = &pok_sched_part_wrr;
 	    break;
 #endif
+#ifdef POK_NEEDS_SCHED_PRIORITY
+	case POK_SCHED_PRIORITY:
+	    pok_partitions[pid].sched_func  = &pok_sched_part_wrr;
+	    break;
+#endif
 
             /*
              * Default scheduling algorithm is Round Robin.
@@ -283,10 +288,10 @@ pok_ret_t pok_partition_set_mode (const uint8_t pid, const pok_partition_mode_t 
             return POK_ERRNO_PARTITION_MODE;
          }
 
-         if (POK_SCHED_CURRENT_THREAD != POK_CURRENT_PARTITION.thread_main)
+         /*if (POK_SCHED_CURRENT_THREAD != POK_CURRENT_PARTITION.thread_main)
          {
             return POK_ERRNO_PARTITION_MODE;
-         }
+         }*/
 
          pok_partitions[pid].mode = mode;  /* Here, we change the mode */
 
@@ -395,7 +400,7 @@ pok_ret_t pok_partition_set_mode (const uint8_t pid, const pok_partition_mode_t 
  */
 pok_ret_t pok_partition_set_mode_current (const pok_partition_mode_t mode)
 {
-#ifdef POK_NEEDS_ERROR_HANDLING
+/*#ifdef POK_NEEDS_ERROR_HANDLING
    if ((POK_SCHED_CURRENT_THREAD != POK_CURRENT_PARTITION.thread_main) &&
        (POK_SCHED_CURRENT_THREAD != POK_CURRENT_PARTITION.thread_error))
 #else
@@ -403,8 +408,7 @@ pok_ret_t pok_partition_set_mode_current (const pok_partition_mode_t mode)
 #endif
    {
       return POK_ERRNO_THREAD;
-   }
-
+   }*/
    /*
     * Here, we check which thread call this function.
     * In fact, only two threads can change the partition mode : the init thread

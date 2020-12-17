@@ -54,6 +54,7 @@ uint8_t pok_sched_get_priority_max (const pok_sched_t sched_type);
 
 /* Scheduler election method */
 uint8_t pok_sched_election (void);
+uint32_t pok_sched_part_priority (const uint32_t ,const uint32_t,const uint32_t prev_thread,const uint32_t current_thread);
 uint32_t pok_sched_part_rr (const uint32_t ,const uint32_t,const uint32_t prev_thread,const uint32_t current_thread);
 uint32_t pok_sched_part_rms (const uint32_t ,const uint32_t,const uint32_t prev_thread,const uint32_t current_thread);
 uint32_t pok_sched_part_fifo (const uint32_t ,const uint32_t,const uint32_t prev_thread,const uint32_t current_thread);
