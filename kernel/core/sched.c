@@ -112,6 +112,41 @@ void pok_sched_init (void)
 #endif
 #endif
 
+#ifdef POK_PARTITION_NEEDS_SCHED_FIFO
+  for(uint32_t i = 0; i < POK_CONFIG_SCHEDULING_NBSLOTS; i++){
+	pok_sched_slots_allocation[i] = ((uint8_t[])POK_PARTITION_FIFO)[i%3];
+  }
+#endif
+
+#ifdef POK_PARTITION_NEEDS_SCHED_PRIORITY
+  uint32_t min,max;
+  min = 256;
+  max = 0;
+printf("%d %d %d\n",((uint8_t[])POK_PARTITION_PRIORITY)[0],((uint8_t[])POK_PARTITION_PRIORITY)[1],((uint8_t[])POK_PARTITION_PRIORITY)[2]);
+  for(uint32_t i = 0; i < POK_CONFIG_SCHEDULING_NBSLOTS/2; i++){
+	  if (i!=0 && ((uint8_t[])POK_PARTITION_PRIORITY)[i] == ((uint8_t[])POK_PARTITION_PRIORITY)[i-1])
+		((uint8_t[])POK_PARTITION_PRIORITY)[i]++;
+	  if (((uint8_t[])POK_PARTITION_PRIORITY)[i]<min)
+		min = ((uint8_t[])POK_PARTITION_PRIORITY)[i];
+	  if (((uint8_t[])POK_PARTITION_PRIORITY)[i]>max)
+		max = ((uint8_t[])POK_PARTITION_PRIORITY)[i];	
+}
+printf("%d %d\n",min,max);
+  for(uint32_t i = 0; i < POK_CONFIG_SCHEDULING_NBSLOTS/2; i++){
+	  if (((uint8_t[])POK_PARTITION_PRIORITY)[i]==min)
+		pok_sched_slots_allocation[0]=i;
+	  else if (((uint8_t[])POK_PARTITION_PRIORITY)[i]==max)
+		pok_sched_slots_allocation[2]=i;
+	  else
+		pok_sched_slots_allocation[1]=i;
+}
+for(uint32_t i = 0; i < POK_CONFIG_SCHEDULING_NBSLOTS; i++){
+	if (i>=3)
+		pok_sched_slots_allocation[i] = pok_sched_slots_allocation[i-3];
+  }
+printf("%d %d %d\n",pok_sched_slots_allocation[0],pok_sched_slots_allocation[1],pok_sched_slots_allocation[2]);
+#endif
+
    pok_sched_current_slot        = 0;
    pok_sched_next_major_frame    = POK_CONFIG_SCHEDULING_MAJOR_FRAME;
    pok_sched_next_deadline       = pok_sched_slots[0];
