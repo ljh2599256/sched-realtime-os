@@ -38,14 +38,15 @@ void* pinger_job ()
       //pok_partition_set_mode (POK_PARTITION_MODE_INIT_WARM);
       printf ("P1T1: it is my turn\n");
       tattr.priority = rand() % 255;
+      tattr.deadline = (rand() % 20)*1000000;
       tattr.entry = pinger_job2;
       tattr.period = 150000000;
-      tattr.deadline = 20000000;
+      //tattr.deadline = 20000000;
       ret = pok_thread_create(&tid , &tattr);
       printf("[P1] pok_thread_create (1) return=%d\n", ret);
 
-      ret = pok_partition_set_mode (POK_PARTITION_MODE_NORMAL);
-      printf("[P1] pok_partition_set_mode (1) return=%d\n", ret);
+      //ret = pok_partition_set_mode (POK_PARTITION_MODE_NORMAL);
+      //printf("[P1] pok_partition_set_mode (1) return=%d\n", ret);
       pok_thread_sleep (2000000);
    }
 }
@@ -59,7 +60,7 @@ void* pinger_job2 ()
    {
       pok_thread_id (&id);
       pok_thread_status(id, &attr);
-      printf ("P1T2: it is my turn; id=%d  priority=%d\n", id, attr.priority);
+      printf ("P1T2: it is my turn; id=%d  priority=%d  deadline=%d\n", attr.id, attr.priority, attr.deadline);
       pok_thread_sleep (2000000);
    }
 }

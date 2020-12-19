@@ -217,6 +217,9 @@ pok_ret_t pok_partition_thread_create (uint32_t*                  thread_id,
 
    id = pok_partitions[partition_id].thread_index_low +  pok_partitions[partition_id].thread_index;
    pok_partitions[partition_id].thread_index =  pok_partitions[partition_id].thread_index + 1;
+   
+   //mycode set thread id   
+   pok_threads[id].id = id;
 
     if ((attr->priority <= pok_sched_get_priority_max (pok_partitions[partition_id].sched)) && (attr->priority >= pok_sched_get_priority_min (pok_partitions[partition_id].sched)))
    {
@@ -427,13 +430,15 @@ pok_ret_t pok_thread_get_status (const uint32_t id, pok_thread_attr_t *attr)
 {
   if (POK_CURRENT_PARTITION.thread_index_low > id || POK_CURRENT_PARTITION.thread_index_high < id)
     return POK_ERRNO_PARAM;
-  attr->deadline = pok_threads[id].end_time;
+  attr->deadline = pok_threads[id].deadline;
+  //attr->deadline = pok_threads[id].end_time;
   attr->state = pok_threads[id].state;
   attr->priority = pok_threads[id].priority;
   attr->entry = pok_threads[id].entry;
   attr->period = pok_threads[id].period;
   attr->time_capacity = pok_threads[id].time_capacity;
   attr->stack_size = POK_USER_STACK_SIZE;
+  attr->id = pok_threads[id].id;
   return POK_ERRNO_OK;
 }
 

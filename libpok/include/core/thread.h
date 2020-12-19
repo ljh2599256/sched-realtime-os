@@ -38,6 +38,7 @@ typedef struct
 	 uint64_t     time_capacity;
 	 uint32_t     stack_size;
 	 uint32_t  state;
+         uint32_t     id;
 } pok_thread_attr_t;
 
 
