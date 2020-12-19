@@ -21,8 +21,8 @@ void* pinger_job ()
 {
    while (1)
    {
-      printf("P2T1: begin of task\n");
-      pok_thread_sleep (5000000);
+      printf("P2T1: it is my turn\n");
+      pok_thread_sleep (2000000);
    }
 }
 
