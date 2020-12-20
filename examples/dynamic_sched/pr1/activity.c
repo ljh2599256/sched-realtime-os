@@ -21,8 +21,8 @@
 #include <core/semaphore.h>
 #include <types.h>
 #include <core/partition.h>
-//#define SCHED_WRR 1
-#define SCHED_RR 1
+#define SCHED_WRR 1
+//#define SCHED_RR 1
 
 extern uint8_t sid;
 uint8_t val;
@@ -71,8 +71,9 @@ void* pinger_job2 ()
 #endif
       pok_thread_id (&id);
       pok_thread_status(id, &attr);
-      printf ("P1T2: it is my turn; id=%d  priority=%d  deadline=%d", attr.id, attr.priority, attr.deadline);
-      printf(" weight=%d\n", attr.weight);
+      //printf ("P1T2: it is my turn; id=%d  priority=%d\n", attr.id, attr.priority);
+      printf ("P1T2: it is my turn; id=%d deadline=%d\n ", attr.id, attr.deadline);
+      //printf(" weight=%d\n", attr.weight);
       pok_thread_sleep (2000000);
    }
 }

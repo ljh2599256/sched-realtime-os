@@ -63,8 +63,13 @@ extern void pok_port_flush_partition (uint8_t);
 
 uint64_t           pok_sched_slots[POK_CONFIG_SCHEDULING_NBSLOTS]
                               = (uint64_t[]) POK_CONFIG_SCHEDULING_SLOTS;
+
+#ifdef POK_PARTITION_NEEDS_SCHED_WRR
+uint8_t           pok_sched_slots_allocation[POK_PARTITION_WRRNB];
+#else
 uint8_t           pok_sched_slots_allocation[POK_CONFIG_SCHEDULING_NBSLOTS]
                               = (uint8_t[]) POK_CONFIG_SCHEDULING_SLOTS_ALLOCATION;
+#endif
 
 pok_sched_t       pok_global_sched;
 uint64_t          pok_sched_next_deadline;
@@ -152,25 +157,32 @@ uint32_t min,max;
   min = 256;
   max = 0;
   for(uint32_t i = 0; i < POK_CONFIG_SCHEDULING_NBSLOTS/2; i++){
-	  if (i!=0 && ((uint8_t[])POK_PARTITION_PRIORITY)[i] == ((uint8_t[])POK_PARTITION_PRIORITY)[i-1])
-		((uint8_t[])POK_PARTITION_PRIORITY)[i]++;
-	  if (((uint8_t[])POK_PARTITION_PRIORITY)[i]<min)
-		min = ((uint8_t[])POK_PARTITION_PRIORITY)[i];
-	  if (((uint8_t[])POK_PARTITION_PRIORITY)[i]>max)
-		max = ((uint8_t[])POK_PARTITION_PRIORITY)[i];	
+	  if (i!=0 && ((uint8_t[])POK_PARTITION_WEIGHT)[i] == ((uint8_t[])POK_PARTITION_WEIGHT)[i-1])
+		((uint8_t[])POK_PARTITION_WEIGHT)[i]++;
+	  if (((uint8_t[])POK_PARTITION_WEIGHT)[i]<min)
+		min = ((uint8_t[])POK_PARTITION_WEIGHT)[i];
+	  if (((uint8_t[])POK_PARTITION_WEIGHT)[i]>max)
+		max = ((uint8_t[])POK_PARTITION_WEIGHT)[i];	
 }
+
   for(uint32_t i = 0; i < POK_CONFIG_SCHEDULING_NBSLOTS/2; i++){
-	  if (((uint8_t[])POK_PARTITION_PRIORITY)[i]==min)
-		pok_sched_slots_allocation[0]=i;
-	  else if (((uint8_t[])POK_PARTITION_PRIORITY)[i]==max)
-		pok_sched_slots_allocation[2]=i;
-	  else
-		pok_sched_slots_allocation[1]=i;
+	  if (((uint8_t[])POK_PARTITION_WEIGHT)[i]==min){
+		for(uint32_t j = 0; j < min; j++){
+			pok_sched_slots_allocation[POK_PARTITION_WRRNB - 1 - j] = i;
+		}
+	  }
+	  else if (((uint8_t[])POK_PARTITION_WEIGHT)[i]==max){
+	  	for(uint32_t j = 0; j< max; j++){
+			pok_sched_slots_allocation[j] = i;
+		}
+	  }
+	  else{
+		uint32_t tmp_nb = POK_PARTITION_WRRNB - max -min;
+		for(uint32_t j = 0; j < tmp_nb; j++){
+			pok_sched_slots_allocation[max+j] = i;
+		} 
+	  }
 }
-for(uint32_t i = 0; i < POK_CONFIG_SCHEDULING_NBSLOTS; i++){
-	if (i>=3)
-		pok_sched_slots_allocation[i] = pok_sched_slots_allocation[i-3];
-  }
 #endif
 
 #ifdef POK_PARTITION_NEEDS_SCHED_EDF
@@ -235,7 +247,7 @@ uint8_t	pok_elect_partition()
       //pok_port_flushall();
     }
 
-    pok_sched_current_slot = (pok_sched_current_slot + 1) % POK_CONFIG_SCHEDULING_NBSLOTS;
+    pok_sched_current_slot = (pok_sched_current_slot + 1) % POK_PARTITION_WRRNB;
     pok_sched_next_deadline = pok_sched_next_deadline + pok_sched_slots[pok_sched_current_slot];
     
     next_partition = pok_sched_slots_allocation[pok_sched_current_slot];
@@ -377,11 +389,14 @@ uint32_t	pok_elect_thread(uint8_t new_partition_id)
             if (POK_CURRENT_THREAD.remaining_time_capacity > 0)
             {
                POK_CURRENT_THREAD.remaining_time_capacity = POK_CURRENT_THREAD.remaining_time_capacity - 1;
+/*
 #if defined (POK_NEEDS_SCHED_WRR) || defined (POK_NEEDS_SCHED_RR)
 #ifdef POK_NEEDS_DEBUG
 	       printf("thread id=%d, it's my time slice\n", pok_threads[new_partition->current_thread].id);
 #endif
 #endif
+*/
+
             }
             else if(POK_CURRENT_THREAD.time_capacity > 0) // Wait next activation only for thread 
                                                           // with non-infinite capacity (could be 

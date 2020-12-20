@@ -39,7 +39,7 @@ int main ()
   tattr.entry = pinger_job;
   //tattr.period = 150000000;
   tattr.deadline = 20000000;
-
+  tattr.weight = 5;
   ret = pok_thread_create(&tid , &tattr);
   printf("[P1] pok_thread_create (1) return=%d\n", ret);
 
@@ -49,6 +49,7 @@ int main ()
   tattr.entry = pinger_job2;
   //tattr.period = 50000000;
   tattr.deadline = 150000000;
+  tattr.weight = 3;
   ret = pok_thread_create(&tid , &tattr);
   printf("[P1] pok_thread_create (2) return=%d\n", ret);
 
@@ -59,7 +60,7 @@ int main ()
   tattr.entry = pinger_job3;
   //tattr.period = 150000000;
   tattr.deadline = 50000000;
-
+  tattr.weight = 1;
   ret = pok_thread_create(&tid , &tattr);
   printf("[P1] pok_thread_create (3) return=%d\n", ret);
 
