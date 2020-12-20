@@ -35,19 +35,20 @@ int main ()
 
 
   //thread1----------------------------------------------------------------------
-  tattr.priority = 43;
+  tattr.priority = 200;
   tattr.entry = pinger_job;
   //tattr.period = 150000000;
-  tattr.deadline = 20000000;
+  tattr.deadline = 3000000;
   tattr.weight = 5;
+  //tattr.time_capacity = 100000000;
   ret = pok_thread_create(&tid , &tattr);
-  printf("[P1] pok_thread_create (1) return=%d\n", ret);
+  //printf("[P1] pok_thread_create (1) return=%d\n", ret);
 
 
   //thread2----------------------------------------------------------------------
-  tattr.priority = 42;
+  /*tattr.priority = 42;
   tattr.entry = pinger_job2;
-  //tattr.period = 50000000;
+  tattr.period = 50000000;
   tattr.deadline = 150000000;
   tattr.weight = 3;
   ret = pok_thread_create(&tid , &tattr);
@@ -55,14 +56,13 @@ int main ()
 
 
 
-  //thread3----------------------------------------------------------------------
   tattr.priority = 41;
   tattr.entry = pinger_job3;
-  //tattr.period = 150000000;
+  tattr.period = 150000000;
   tattr.deadline = 50000000;
   tattr.weight = 1;
   ret = pok_thread_create(&tid , &tattr);
-  printf("[P1] pok_thread_create (3) return=%d\n", ret);
+  printf("[P1] pok_thread_create (3) return=%d\n", ret);*/
 
   pok_partition_set_mode (POK_PARTITION_MODE_NORMAL);
   pok_thread_wait_infinite ();

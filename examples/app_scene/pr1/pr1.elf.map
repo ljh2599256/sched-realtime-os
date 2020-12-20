@@ -1,0 +1,223 @@
+由于文件 (符号) 而包含了归档成员
+
+/home/ljh/downloads/pok_sched/examples/app_scene/pr1/../../..//libpok/libpok.a(arch.lo)
+                              main.o (pok_do_syscall)
+/home/ljh/downloads/pok_sched/examples/app_scene/pr1/../../..//libpok/libpok.a(core.lo)
+                              activity.o (pok_time_get)
+/home/ljh/downloads/pok_sched/examples/app_scene/pr1/../../..//libpok/libpok.a(libc.lo)
+                              activity.o (printf)
+
+分配公共符号
+公共符号            大小              文件
+
+pok_allocator_memspace
+                    0x8000            /home/ljh/downloads/pok_sched/examples/app_scene/pr1/../../..//libpok/libpok.a(core.lo)
+errno               0x4               /home/ljh/downloads/pok_sched/examples/app_scene/pr1/../../..//libpok/libpok.a(core.lo)
+val                 0x2               activity.o
+pok_allocator_spaces
+                    0x4b0             /home/ljh/downloads/pok_sched/examples/app_scene/pr1/../../..//libpok/libpok.a(core.lo)
+sid                 0x2               main.o
+
+内存配置
+
+名称           来源             长度             属性
+*default*        0x0000000000000000 0xffffffffffffffff
+
+链结器命令稿和内存映射
+
+                0x0000000000000000                . = 0x0
+                0x0000000000000000                __partition_begin = .
+
+.text           0x0000000000000000     0x1763
+ *(.text)
+ .text          0x0000000000000000       0xd2 main.o
+                0x0000000000000000                main
+ .text          0x00000000000000d2      0x3b7 activity.o
+                0x00000000000000d2                pinger_job2
+                0x000000000000024f                pinger_job3
+                0x0000000000000310                pinger_job
+ .text          0x0000000000000489       0x14 /home/ljh/downloads/pok_sched/examples/app_scene/pr1/../../..//libpok/libpok.a(arch.lo)
+                0x0000000000000489                pok_arch_idle
+                0x000000000000048c                pok_do_syscall
+ .text          0x000000000000049d      0x958 /home/ljh/downloads/pok_sched/examples/app_scene/pr1/../../..//libpok/libpok.a(core.lo)
+                0x000000000000049d                pok_allocator_print_spaces
+                0x0000000000000504                pok_allocator_allocate
+                0x00000000000006ee                pok_allocator_delete_space
+                0x000000000000074b                pok_allocator_merge_space
+                0x0000000000000820                pok_allocator_free
+                0x000000000000091f                pok_time_gettick
+                0x0000000000000971                pok_time_get
+                0x0000000000000990                __pok_partition_start
+                0x00000000000009b0                pok_sem_create
+                0x0000000000000a33                pok_sem_signal
+                0x0000000000000a9c                pok_sem_status
+                0x0000000000000aa2                pok_sem_wait
+                0x0000000000000b1b                pok_thread_create
+                0x0000000000000b6d                pok_thread_attr_init
+                0x0000000000000bb7                pok_thread_period
+                0x0000000000000c09                pok_thread_sleep
+                0x0000000000000c5b                pok_thread_status
+                0x0000000000000cad                pok_thread_delayed_start
+                0x0000000000000cff                pok_thread_id
+                0x0000000000000d51                pok_thread_set_priority
+                0x0000000000000da3                pok_thread_resume
+ .text          0x0000000000000df5      0x96e /home/ljh/downloads/pok_sched/examples/app_scene/pr1/../../..//libpok/libpok.a(libc.lo)
+                0x0000000000001121                vprintf
+                0x000000000000128d                printf
+                0x00000000000012b4                itoa
+                0x0000000000001351                atoi
+                0x0000000000001396                memcpy
+                0x00000000000013be                memset
+                0x00000000000013e0                memcmp
+                0x000000000000142f                strcmp
+                0x0000000000001471                strncmp
+                0x00000000000014cd                strcpy
+                0x00000000000014fd                strncpy
+                0x0000000000001537                streq
+                0x00000000000015de                strlen
+                0x00000000000015fd                __udivdi3
+                0x00000000000016a5                __umoddi3
+                0x00000000000016d0                rand
+                0x0000000000001700                free
+                0x000000000000171f                malloc
+                0x000000000000173e                calloc
+
+.iplt           0x0000000000001770        0x0
+ .iplt          0x0000000000001770        0x0 main.o
+
+.rodata         0x0000000000001780       0x7d
+ *(.rodata)
+ .rodata        0x0000000000001780       0x7d /home/ljh/downloads/pok_sched/examples/app_scene/pr1/../../..//libpok/libpok.a(libc.lo)
+
+.eh_frame       0x0000000000001800      0xa28
+ .eh_frame      0x0000000000001800       0x44 main.o
+ .eh_frame      0x0000000000001844      0x1ec activity.o
+                                        0x204 (松开之前的大小)
+ .eh_frame      0x0000000000001a30       0x30 /home/ljh/downloads/pok_sched/examples/app_scene/pr1/../../..//libpok/libpok.a(arch.lo)
+                                         0x60 (松开之前的大小)
+ .eh_frame      0x0000000000001a60      0x370 /home/ljh/downloads/pok_sched/examples/app_scene/pr1/../../..//libpok/libpok.a(core.lo)
+                                        0x4f0 (松开之前的大小)
+ .eh_frame      0x0000000000001dd0      0x458 /home/ljh/downloads/pok_sched/examples/app_scene/pr1/../../..//libpok/libpok.a(libc.lo)
+                                        0x5d8 (松开之前的大小)
+
+.rodata.str1.4  0x0000000000002228      0x3a8
+ .rodata.str1.4
+                0x0000000000002228      0x179 activity.o
+ *fill*         0x00000000000023a1        0x3 
+ .rodata.str1.4
+                0x00000000000023a4      0x22c /home/ljh/downloads/pok_sched/examples/app_scene/pr1/../../..//libpok/libpok.a(core.lo)
+                                        0x22b (松开之前的大小)
+
+.rel.dyn        0x00000000000025d0        0x0
+ .rel.iplt      0x00000000000025d0        0x0 main.o
+ .rel.text      0x00000000000025d0        0x0 main.o
+
+.data           0x00000000000025e0     0x8590
+ *(.data)
+ .data          0x00000000000025e0        0x0 main.o
+ .data          0x00000000000025e0        0x0 activity.o
+ .data          0x00000000000025e0        0x0 /home/ljh/downloads/pok_sched/examples/app_scene/pr1/../../..//libpok/libpok.a(arch.lo)
+ .data          0x00000000000025e0        0x0 /home/ljh/downloads/pok_sched/examples/app_scene/pr1/../../..//libpok/libpok.a(core.lo)
+ .data          0x00000000000025e0        0x4 /home/ljh/downloads/pok_sched/examples/app_scene/pr1/../../..//libpok/libpok.a(libc.lo)
+ *(.bss)
+ .bss           0x00000000000025e4        0x0 main.o
+ .bss           0x00000000000025e4        0x0 activity.o
+ .bss           0x00000000000025e4        0x0 /home/ljh/downloads/pok_sched/examples/app_scene/pr1/../../..//libpok/libpok.a(arch.lo)
+ .bss           0x00000000000025e4        0x8 /home/ljh/downloads/pok_sched/examples/app_scene/pr1/../../..//libpok/libpok.a(core.lo)
+                0x00000000000025e4                pok_allocator_initialized
+                0x00000000000025e8                pok_allocator_used_spaces
+ *fill*         0x00000000000025ec       0x14 
+ .bss           0x0000000000002600       0x84 /home/ljh/downloads/pok_sched/examples/app_scene/pr1/../../..//libpok/libpok.a(libc.lo)
+ *(COMMON)
+ COMMON         0x0000000000002684        0x2 main.o
+                0x0000000000002684                sid
+ COMMON         0x0000000000002686        0x2 activity.o
+                0x0000000000002686                val
+ *fill*         0x0000000000002688       0x18 
+ COMMON         0x00000000000026a0     0x84d0 /home/ljh/downloads/pok_sched/examples/app_scene/pr1/../../..//libpok/libpok.a(core.lo)
+                0x00000000000026a0                pok_allocator_memspace
+                0x000000000000a6a0                errno
+                0x000000000000a6c0                pok_allocator_spaces
+                0x000000000000ab70                __partition_end = .
+LOAD main.o
+LOAD activity.o
+LOAD /home/ljh/downloads/pok_sched/examples/app_scene/pr1/../../..//libpok/libpok.a
+LOAD /home/ljh/downloads/pok_sched/examples/app_scene/pr1/../../..//libpok//libpok.a
+OUTPUT(pr1.elf elf32-i386)
+
+.igot.plt       0x000000000000ab70        0x0
+ .igot.plt      0x000000000000ab70        0x0 main.o
+
+.debug_info     0x0000000000000000     0x50c7
+ .debug_info    0x0000000000000000      0x3e6 main.o
+ .debug_info    0x00000000000003e6      0x519 activity.o
+ .debug_info    0x00000000000008ff      0x322 /home/ljh/downloads/pok_sched/examples/app_scene/pr1/../../..//libpok/libpok.a(arch.lo)
+ .debug_info    0x0000000000000c21     0x2ec7 /home/ljh/downloads/pok_sched/examples/app_scene/pr1/../../..//libpok/libpok.a(core.lo)
+ .debug_info    0x0000000000003ae8     0x15df /home/ljh/downloads/pok_sched/examples/app_scene/pr1/../../..//libpok/libpok.a(libc.lo)
+
+.debug_abbrev   0x0000000000000000     0x1b52
+ .debug_abbrev  0x0000000000000000       0xfc main.o
+ .debug_abbrev  0x00000000000000fc      0x125 activity.o
+ .debug_abbrev  0x0000000000000221      0x10b /home/ljh/downloads/pok_sched/examples/app_scene/pr1/../../..//libpok/libpok.a(arch.lo)
+ .debug_abbrev  0x000000000000032c      0xd3b /home/ljh/downloads/pok_sched/examples/app_scene/pr1/../../..//libpok/libpok.a(core.lo)
+ .debug_abbrev  0x0000000000001067      0xaeb /home/ljh/downloads/pok_sched/examples/app_scene/pr1/../../..//libpok/libpok.a(libc.lo)
+
+.debug_aranges  0x0000000000000000      0x4b0
+ .debug_aranges
+                0x0000000000000000       0x20 main.o
+ .debug_aranges
+                0x0000000000000020       0x20 activity.o
+ .debug_aranges
+                0x0000000000000040       0x40 /home/ljh/downloads/pok_sched/examples/app_scene/pr1/../../..//libpok/libpok.a(arch.lo)
+ .debug_aranges
+                0x0000000000000080      0x218 /home/ljh/downloads/pok_sched/examples/app_scene/pr1/../../..//libpok/libpok.a(core.lo)
+ .debug_aranges
+                0x0000000000000298      0x218 /home/ljh/downloads/pok_sched/examples/app_scene/pr1/../../..//libpok/libpok.a(libc.lo)
+
+.debug_line     0x0000000000000000     0x1a53
+ .debug_line    0x0000000000000000      0x17e main.o
+ .debug_line    0x000000000000017e      0x237 activity.o
+ .debug_line    0x00000000000003b5       0xf4 /home/ljh/downloads/pok_sched/examples/app_scene/pr1/../../..//libpok/libpok.a(arch.lo)
+ .debug_line    0x00000000000004a9      0xc3a /home/ljh/downloads/pok_sched/examples/app_scene/pr1/../../..//libpok/libpok.a(core.lo)
+ .debug_line    0x00000000000010e3      0x970 /home/ljh/downloads/pok_sched/examples/app_scene/pr1/../../..//libpok/libpok.a(libc.lo)
+
+.debug_str      0x0000000000000000     0x13c5
+ .debug_str     0x0000000000000000      0x8d8 main.o
+                                        0x915 (松开之前的大小)
+ .debug_str     0x00000000000008d8       0x81 activity.o
+                                        0x4b7 (松开之前的大小)
+ .debug_str     0x0000000000000959       0x83 /home/ljh/downloads/pok_sched/examples/app_scene/pr1/../../..//libpok/libpok.a(arch.lo)
+                                        0x90b (松开之前的大小)
+ .debug_str     0x00000000000009dc      0x6ac /home/ljh/downloads/pok_sched/examples/app_scene/pr1/../../..//libpok/libpok.a(core.lo)
+                                       0x7f32 (松开之前的大小)
+ .debug_str     0x0000000000001088      0x33d /home/ljh/downloads/pok_sched/examples/app_scene/pr1/../../..//libpok/libpok.a(libc.lo)
+                                       0x1976 (松开之前的大小)
+
+.comment        0x0000000000000000       0x35
+ .comment       0x0000000000000000       0x35 main.o
+                                         0x36 (松开之前的大小)
+ .comment       0x0000000000000035       0x36 activity.o
+ .comment       0x0000000000000035       0xd8 /home/ljh/downloads/pok_sched/examples/app_scene/pr1/../../..//libpok/libpok.a(arch.lo)
+ .comment       0x0000000000000035      0x798 /home/ljh/downloads/pok_sched/examples/app_scene/pr1/../../..//libpok/libpok.a(core.lo)
+ .comment       0x0000000000000035      0x396 /home/ljh/downloads/pok_sched/examples/app_scene/pr1/../../..//libpok/libpok.a(libc.lo)
+
+.note.GNU-stack
+                0x0000000000000000        0x0
+ .note.GNU-stack
+                0x0000000000000000        0x0 main.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 activity.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 /home/ljh/downloads/pok_sched/examples/app_scene/pr1/../../..//libpok/libpok.a(arch.lo)
+ .note.GNU-stack
+                0x0000000000000000        0x0 /home/ljh/downloads/pok_sched/examples/app_scene/pr1/../../..//libpok/libpok.a(core.lo)
+ .note.GNU-stack
+                0x0000000000000000        0x0 /home/ljh/downloads/pok_sched/examples/app_scene/pr1/../../..//libpok/libpok.a(libc.lo)
+
+.debug_loc      0x0000000000000000     0x1312
+ .debug_loc     0x0000000000000000      0x15a activity.o
+ .debug_loc     0x000000000000015a      0x1dd /home/ljh/downloads/pok_sched/examples/app_scene/pr1/../../..//libpok/libpok.a(core.lo)
+ .debug_loc     0x0000000000000337      0xfdb /home/ljh/downloads/pok_sched/examples/app_scene/pr1/../../..//libpok/libpok.a(libc.lo)
+
+.debug_ranges   0x0000000000000000       0x30
+ .debug_ranges  0x0000000000000000       0x30 /home/ljh/downloads/pok_sched/examples/app_scene/pr1/../../..//libpok/libpok.a(libc.lo)
