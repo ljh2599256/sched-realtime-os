@@ -105,9 +105,9 @@ void pok_sched_init (void)
 
    if (total_time != POK_CONFIG_SCHEDULING_MAJOR_FRAME)
    {
-#ifdef POK_NEEDS_DEBUG
+/*#ifdef POK_NEEDS_DEBUG
       printf ("Major frame is not compliant with all time slots\n");
-#endif
+#endif*/
 #ifdef POK_NEEDS_ERROR_HANDLING
       pok_kernel_error (POK_ERROR_KIND_KERNEL_CONFIG);
 #endif
@@ -377,6 +377,11 @@ uint32_t	pok_elect_thread(uint8_t new_partition_id)
             if (POK_CURRENT_THREAD.remaining_time_capacity > 0)
             {
                POK_CURRENT_THREAD.remaining_time_capacity = POK_CURRENT_THREAD.remaining_time_capacity - 1;
+#if defined (POK_NEEDS_SCHED_WRR) || defined (POK_NEEDS_SCHED_RR)
+#ifdef POK_NEEDS_DEBUG
+	       printf("thread id=%d, it's my time slice\n", pok_threads[new_partition->current_thread].id);
+#endif
+#endif
             }
             else if(POK_CURRENT_THREAD.time_capacity > 0) // Wait next activation only for thread 
                                                           // with non-infinite capacity (could be 
@@ -513,10 +518,10 @@ void pok_sched_context_switch (const uint32_t elected_id)
 uint32_t pok_sched_part_fifo (const uint32_t index_low, const uint32_t index_high,const uint32_t __attribute__((unused)) prev_thread,const uint32_t __attribute__((unused)) current_thread)
 {
     uint32_t res;
-#ifdef POK_NEEDS_DEBUG
+/*#ifdef POK_NEEDS_DEBUG
    uint32_t from;
    from = prev_thread;
-#endif
+#endif*/
     res= index_low;
 
    do
@@ -535,7 +540,7 @@ uint32_t pok_sched_part_fifo (const uint32_t index_low, const uint32_t index_hig
       res = IDLE_THREAD;
    }
 
-#ifdef POK_NEEDS_DEBUG
+/*#ifdef POK_NEEDS_DEBUG
     if ( res!= IDLE_THREAD)
     {
         printf("--- scheduling thread: %d {%d} --- ", res,
@@ -562,7 +567,7 @@ uint32_t pok_sched_part_fifo (const uint32_t index_low, const uint32_t index_hig
         printf(" are NOT runnable;\n");
 
     }
-#endif
+#endif*/
 
    return res;
 }
@@ -573,10 +578,10 @@ uint32_t pok_sched_part_fifo (const uint32_t index_low, const uint32_t index_hig
 uint32_t pok_sched_part_priority (const uint32_t index_low, const uint32_t index_high,const uint32_t __attribute__((unused)) prev_thread,const uint32_t __attribute__((unused)) current_thread)
 {
     uint32_t res;
-#ifdef POK_NEEDS_DEBUG
+/*#ifdef POK_NEEDS_DEBUG
    uint32_t from;
    from = prev_thread;
-#endif
+#endif*/
     res= index_low;
 
    do
@@ -595,7 +600,7 @@ uint32_t pok_sched_part_priority (const uint32_t index_low, const uint32_t index
       res = IDLE_THREAD;
    }
 
-#ifdef POK_NEEDS_DEBUG
+/*#ifdef POK_NEEDS_DEBUG
     if ( res!= IDLE_THREAD)
     {
         printf("--- scheduling thread: %d {%d} --- ", res,
@@ -622,7 +627,7 @@ uint32_t pok_sched_part_priority (const uint32_t index_low, const uint32_t index
         printf(" are NOT runnable;\n");
 
     }
-#endif
+#endif*/
 
    return res;
 }
@@ -633,10 +638,10 @@ uint32_t pok_sched_part_priority (const uint32_t index_low, const uint32_t index
 uint32_t pok_sched_part_edf (const uint32_t index_low, const uint32_t index_high,const uint32_t __attribute__((unused)) prev_thread,const uint32_t __attribute__((unused)) current_thread)
 {
     uint32_t res;
-#ifdef POK_NEEDS_DEBUG
+/*#ifdef POK_NEEDS_DEBUG
    uint32_t from;
    from = prev_thread;
-#endif
+#endif*/
     res= index_low;
 
    do
@@ -655,7 +660,7 @@ uint32_t pok_sched_part_edf (const uint32_t index_low, const uint32_t index_high
       res = IDLE_THREAD;
    }
 
-#ifdef POK_NEEDS_DEBUG
+/*#ifdef POK_NEEDS_DEBUG
     if ( res!= IDLE_THREAD)
     {
         printf("--- scheduling thread: %d {%d} --- ", res,
@@ -682,7 +687,7 @@ uint32_t pok_sched_part_edf (const uint32_t index_low, const uint32_t index_high
         printf(" are NOT runnable;\n");
 
     }
-#endif
+#endif*/
 
    return res;
 }
@@ -694,10 +699,10 @@ uint32_t pok_sched_part_edf (const uint32_t index_low, const uint32_t index_high
 uint32_t pok_sched_part_rms (const uint32_t index_low, const uint32_t index_high,const uint32_t __attribute__((unused)) prev_thread,const uint32_t __attribute__((unused)) current_thread)
 {
    uint32_t res;
-#ifdef POK_NEEDS_DEBUG
+/*#ifdef POK_NEEDS_DEBUG
    uint32_t from;
    from = prev_thread;
-#endif
+#endif*/
 
    res= index_low;
 
@@ -717,7 +722,7 @@ uint32_t pok_sched_part_rms (const uint32_t index_low, const uint32_t index_high
       res = IDLE_THREAD;
    }
 
-#ifdef POK_NEEDS_DEBUG
+/*#ifdef POK_NEEDS_DEBUG
     if ( res!= IDLE_THREAD)
     {
         printf("--- scheduling thread: %d {%d} --- ", res,
@@ -744,13 +749,13 @@ uint32_t pok_sched_part_rms (const uint32_t index_low, const uint32_t index_high
         printf(" are NOT runnable;\n");
 
     }
-#endif
+#endif*/
 
    return res;
 }
 #endif /* POK_NEEDS_SCHED_RMS */
 
-
+#ifdef POK_NEEDS_SCHED_WRR
 uint32_t pok_sched_part_wrr (const uint32_t index_low, const uint32_t index_high,const uint32_t prev_thread,const uint32_t current_thread)
 {
    uint32_t res;
@@ -788,7 +793,7 @@ uint32_t pok_sched_part_wrr (const uint32_t index_low, const uint32_t index_high
    }
    return res;
 }
-
+#endif
 
 
 uint32_t pok_sched_part_rr (const uint32_t index_low, const uint32_t index_high,const uint32_t prev_thread,const uint32_t current_thread)

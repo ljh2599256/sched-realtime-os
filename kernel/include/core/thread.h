@@ -75,6 +75,7 @@ typedef struct
 	 uint32_t    init_stack_addr;
   uint8_t	base_priority;
          uint32_t       id;
+         uint32_t       weight;
 	 /* stack pointer
 		* FIXME: this is platform-dependent code, we have to handle that ! */
 } pok_thread_t;
@@ -89,6 +90,7 @@ typedef struct
 	 uint32_t     stack_size;
 	 pok_state_t  state;
          uint32_t     id;
+         uint32_t     weight;
 } pok_thread_attr_t;
 /*
  * Attributes given to create a thread

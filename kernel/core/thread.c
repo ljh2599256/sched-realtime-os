@@ -41,6 +41,8 @@
  *    - one for the kernel thread (this code)
  *    - one for the idle task
  */
+
+
 pok_thread_t		         pok_threads[POK_CONFIG_NB_THREADS];
 
 extern pok_partition_t     pok_partitions[POK_CONFIG_NB_PARTITIONS];
@@ -94,7 +96,7 @@ void pok_thread_insert_sort_wrr(uint16_t index_low, uint16_t index_high)
 
     val=pok_threads[i];
     j=i-1;
-    while ( j>= index_low && pok_threads[j].priority > val.priority)
+    while ( j>= index_low && pok_threads[j].weight < val.weight)
     {
         pok_threads[j+1] = pok_threads[j];
         j--;
@@ -221,6 +223,15 @@ pok_ret_t pok_partition_thread_create (uint32_t*                  thread_id,
    //mycode set thread id   
    pok_threads[id].id = id;
 
+
+    if(attr->weight > 0 && pok_partitions[partition_id].sched == POK_SCHED_WRR)
+   {
+      pok_threads[id].weight = attr->weight;
+#ifdef POK_NEEDS_DEBUG
+      printf("weight=%d\n", pok_threads[id].weight);
+#endif
+   }
+
     if ((attr->priority <= pok_sched_get_priority_max (pok_partitions[partition_id].sched)) && (attr->priority >= pok_sched_get_priority_min (pok_partitions[partition_id].sched)))
    {
       pok_threads[id].priority      = attr->priority;
@@ -249,8 +260,14 @@ pok_ret_t pok_partition_thread_create (uint32_t*                  thread_id,
    }
    else
    {
-      pok_threads[id].remaining_time_capacity   = POK_THREAD_DEFAULT_TIME_CAPACITY;
-      pok_threads[id].time_capacity             = POK_THREAD_DEFAULT_TIME_CAPACITY;
+      if(pok_partitions[partition_id].sched == POK_SCHED_WRR){
+	pok_threads[id].remaining_time_capacity   = pok_threads[id].weight;
+        pok_threads[id].time_capacity             = pok_threads[id].weight;
+      }
+      else{
+         pok_threads[id].remaining_time_capacity   = POK_THREAD_DEFAULT_TIME_CAPACITY;
+         pok_threads[id].time_capacity             = POK_THREAD_DEFAULT_TIME_CAPACITY;
+      }
    }
 
    stack_vaddr = pok_thread_stack_addr (partition_id, pok_partitions[partition_id].thread_index);
@@ -439,6 +456,7 @@ pok_ret_t pok_thread_get_status (const uint32_t id, pok_thread_attr_t *attr)
   attr->time_capacity = pok_threads[id].time_capacity;
   attr->stack_size = POK_USER_STACK_SIZE;
   attr->id = pok_threads[id].id;
+  attr->weight = pok_threads[id].weight;
   return POK_ERRNO_OK;
 }
 

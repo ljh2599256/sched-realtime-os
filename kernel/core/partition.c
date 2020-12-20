@@ -82,7 +82,7 @@ void pok_partition_setup_scheduler (const uint8_t pid)
 #endif
 #ifdef POK_NEEDS_SCHED_PRIORITY
 	case POK_SCHED_PRIORITY:
-	    pok_partitions[pid].sched_func  = &pok_sched_part_wrr;
+	    pok_partitions[pid].sched_func  = &pok_sched_part_priority;
 	    break;
 #endif
 

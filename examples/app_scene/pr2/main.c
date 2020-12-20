@@ -15,34 +15,28 @@
  */
 
 
-#include <libc/stdlib.h>
-#include <libc/stdio.h>
 #include <core/thread.h>
 #include <core/partition.h>
-#include <core/semaphore.h>
 #include <types.h>
 #include "activity.h"
 
-uint8_t sid;
 
 int main ()
 {
   uint8_t tid;
-  pok_ret_t ret;
+  int ret;
   pok_thread_attr_t     tattr;
 
-  //thread1----------------------------------------------------------------------
-  tattr.priority = 0;
+  tattr.priority = 42;
   tattr.entry = pinger_job;
-  //tattr.period = 150000000;
-  tattr.deadline = 0;
-  tattr.weight = 5;
 
   ret = pok_thread_create(&tid , &tattr);
-  printf("main [P1] pok_thread_create (1) return=%d\n", ret);
+  printf ("[P2] thread create returns=%d\n", ret);
 
   pok_partition_set_mode (POK_PARTITION_MODE_NORMAL);
   pok_thread_wait_infinite ();
 
-   return (0);
+  return (1);
 }
+
+
