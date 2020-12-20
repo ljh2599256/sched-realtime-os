@@ -239,7 +239,15 @@ uint8_t	pok_elect_partition()
 # if POK_CONFIG_NB_PARTITIONS > 1
   uint64_t now = POK_GETTICK();
 
-#ifdef POK_PARTITION_NEEDS_SCHED_WRR
+#if defined (POK_PARTITION_NEEDS_SCHED_WRR) || (POK_PARTITION_NEEDS_SCHED_RR)
+  if(pok_rr_time == 0){
+	next_partition = pok_sched_slots_allocation[0];
+	pok_rr_time = now;
+#ifdef POK_NEEDS_DEBUG
+	printf("partition %d: it is my turn\n", next_partition);
+#endif
+	return next_partition;
+  }
   if(((now - pok_rr_time) / 9219) >= POK_PARTITION_SLICE){
     if (pok_sched_next_major_frame <= now)
     {
@@ -247,12 +255,20 @@ uint8_t	pok_elect_partition()
       //pok_port_flushall();
     }
 
+#ifdef POK_PARTITION_NEEDS_SCHED_WRR
     pok_sched_current_slot = (pok_sched_current_slot + 1) % POK_PARTITION_WRRNB;
-    pok_sched_next_deadline = pok_sched_next_deadline + pok_sched_slots[pok_sched_current_slot];
-    
+#else
+    pok_sched_current_slot = (pok_sched_current_slot + 1) % POK_CONFIG_SCHEDULING_NBSLOTS;
+#endif
+
+    pok_sched_next_deadline = pok_sched_next_deadline + pok_sched_slots[pok_sched_current_slot]; 
     next_partition = pok_sched_slots_allocation[pok_sched_current_slot];
 
     pok_rr_time = now;
+
+#ifdef POK_NEEDS_DEBUG
+	printf("partition %d: it is my turn\n", next_partition);
+#endif
 
     return next_partition;
   }

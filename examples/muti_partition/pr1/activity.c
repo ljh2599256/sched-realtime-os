@@ -19,6 +19,7 @@
 #include <core/thread.h>
 #include <core/semaphore.h>
 #include <types.h>
+#define PARTITON_WRR 1
 
 extern uint8_t sid;
 uint8_t val;
@@ -28,6 +29,9 @@ void* pinger_job ()
    pok_ret_t ret;
    while (1)
    {
+#ifdef PARTITON_WRR
+	continue;
+#endif
       printf ("P1T1: it is my turn\n");
       pok_thread_sleep (2000000);
    }

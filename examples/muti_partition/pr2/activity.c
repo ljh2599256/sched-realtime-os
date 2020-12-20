@@ -17,10 +17,15 @@
 
 #include <libc/stdio.h>
 #include <core/thread.h>
+#define PARTITON_WRR 1
+
 void* pinger_job ()
 {
    while (1)
    {
+#ifdef PARTITON_WRR
+	continue;
+#endif
       printf("P2T1: it is my turn\n");
       pok_thread_sleep (2000000);
    }
